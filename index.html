@@ -9,29 +9,57 @@
     <link rel="stylesheet" href="Dependencies/bootstrap.min.css">
     <link rel="stylesheet" href="Style/style.css">
 
-    <title>Travelator Link Generator</title>
+    <title>Link Generator</title>
 </head>
 
 <body>
-    <h1 id="header">Travelator Link Generator</h1>
+    <h1 id="header">Link Generator</h1>
 
     <div class="container">
         <div class="row">
             <div class="col">
                 <div id="inputArea">
-                    <label for="departureAirport" class="label">Departure Airport</label>
-                    <input type="text" name="departureAirport" id="departureAirport">
 
-                    <label for="destinationAirport" class="label">Destination Airport</label>
-                    <input type="text" name="destinationAirport" id="destinationAirport">
+                    <div id="flightMode">
+                        <input type="radio" id="flight" name="mode" value="flight" checked />
+                        <label for="flight">Flight Mode</label>
+                    </div>
 
-                    <label for="destination" class="label">Destination</label>
-                    <input type="text" name="destination" id="destination">
+                    <div id="lodgingsMode">
+                        <input type="radio" id="lodgings" name="mode" value="lodgings" />
+                        <label for="lodgings">Lodgings Mode</label>
+                    </div>
 
-                    <label for="dates" class="label">Travel Dates</label>
-                    <textarea name="dates" id="dates" cols="30" rows="10"></textarea>
+                    <div id="hotelContainer">
+                        <label for="hotel" class="label">Hotel</label>
+                        <input type="text" name="hotel" id="hotel">
 
-                    <input type="button" id="generateLinks" value="Generate Links" onclick="convertDatesToLinks()" class="btn btn-primary">
+                    </div>
+
+                    <div id="departureAirportContainer">
+                        <label for="departureAirport" class="label">Departure Airport</label>
+                        <input type="text" name="departureAirport" id="departureAirport">
+                    </div>
+
+                    <div id="destinationAirportContainer">
+                        <label for="destinationAirport" class="label">Destination Airport</label>
+                        <input type="text" name="destinationAirport" id="destinationAirport">
+                    </div>
+
+                    <div id="destinationContainer">
+                        <label for="destination" class="label">Destination</label>
+                        <input type="text" name="destination" id="destination">
+
+                    </div>
+
+                    <div id="datesContainer">
+                        <label for="dates" class="label">Travel Dates</label>
+                        <textarea name="dates" id="dates" cols="30" rows="10"></textarea>
+                    </div>
+
+
+                    <input type="button" id="generateLinks" value="Generate Links" onclick="convertDatesToLinks()"
+                        class="btn btn-primary">
                 </div>
 
                 <div id="linksContainer">

@@ -1,8 +1,38 @@
-function generateLink(departureAirport, destinationAirport, destination, date) {
-    return 'https://www.momondo.ro/in?a=travelator&url=/flight-search/'
-        + departureAirport + '-' + destinationAirport + '/' + date
-        + '?sort=price_a&encoder=27_1&enc_pid=deeplinks&enc_eid=0&enc_lid=' + destination
-        + '&enc_cid=article&utm_source=travelator&utm_medium=affiliate&utm_term=rev&utm_campaign=deeplinks&utm_content=' + destination;
+$(document).ready(function () {
+    var departureAirport = $('#departureAirportContainer');
+    var destinationAirport = $('#destinationAirportContainer');
+    var hotel = $('#hotelContainer');
+
+    destinationAirport.show();
+    departureAirport.show();
+    hotel.hide();
+
+    $('input[type=radio][name=mode]').change(function () {
+        if (this.value == 'flight') {
+            destinationAirport.show();
+            departureAirport.show();
+            hotel.hide();
+
+        } else if (this.value == 'lodgings') {
+            destinationAirport.hide();
+            departureAirport.hide();
+            hotel.show();
+        }
+    });
+});
+
+function generateFlightLink(departureAirport, destinationAirport, destination, date) {
+    return 'https://www.momondo.ro/in?a=travelator&url=/flight-search/' +
+        departureAirport + '-' + destinationAirport + '/' + date +
+        '?sort=price_a&encoder=27_1&enc_pid=deeplinks&enc_eid=0&enc_lid=' + destination +
+        '&enc_cid=article&utm_source=travelator&utm_medium=affiliate&utm_term=rev&utm_campaign=deeplinks&utm_content=' + destination;
+}
+
+function generateLodgingsLink(affiliateTag, destination, date) {
+    return 'https://www.momondo.ro/in?a=travelator&url=/hotels/' +
+        affiliateTag + '/' + date +
+        '/2adults?sort=price_a&encoder=27_1&enc_pid=deeplinks&enc_eid=0&enc_lid=' + destination +
+        '&enc_cid=article&utm_source=travelator&utm_medium=affiliate&utm_term=rev&utm_campaign=deeplinks&utm_content=' + destination;
 }
 
 function convertMonth(month) {
@@ -58,16 +88,24 @@ function convertToDesiredDateFormat(date) {
 }
 
 function convertDatesToLinks() {
-    var destination = $('#destination').val();
+
+    var mode = $('input[type=radio][name=mode]:checked').val();
+    var hotel = $('#hotel').val();
     var departureAirport = $('#departureAirport').val();
     var destinationAirport = $('#destinationAirport').val();
+    var destination = $('#destination').val();
     var dates = $('#dates').val().split(/\n/);
 
     var links = dates.map(function (date) {
         if (date.trim().length <= 14) {
             var convertedDate = convertToDesiredDateFormat(date);
 
-            return generateLink(departureAirport, destinationAirport, destination, convertedDate);
+            if (mode === 'flight') {
+                return generateFlightLink(departureAirport, destinationAirport, destination, convertedDate);
+            } else if (mode === 'lodgings') {
+                return generateLodgingsLink(hotel, destination, convertedDate);
+            }
+
         } else {
             var startDate = date.split(' - ')[0];
             var endDate = date.split(' - ')[1];
@@ -76,7 +114,11 @@ function convertDatesToLinks() {
             }
             var convertedDate = convertToDesiredDateFormat(startDate) + '/' + convertToDesiredDateFormat(endDate);
 
-            return generateLink(departureAirport, destinationAirport, destination, convertedDate);
+            if (mode === 'flight') {
+                return generateFlightLink(departureAirport, destinationAirport, destination, convertedDate);
+            } else if (mode === 'lodgings') {
+                return generateLodgingsLink(hotel, destination, convertedDate);
+            }
         }
     });
 
