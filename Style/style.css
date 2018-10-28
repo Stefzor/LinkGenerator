@@ -1,0 +1,27 @@
+.label {
+    display: block;
+    margin-top: 25px;
+}
+
+#header {
+    text-align: center;
+    margin-bottom: 5%;
+    margin-top: 20px;
+}
+
+label {
+    font-weight: bold;
+}
+
+textarea {
+    min-width: 60%;
+}
+
+#linksContainer {
+    display: none;
+}
+
+#generateLinks {
+    display: block;
+    margin-top: 20px;
+}
