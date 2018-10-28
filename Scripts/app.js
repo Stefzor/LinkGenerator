@@ -1,38 +1,25 @@
 $(document).ready(function () {
-    var departureAirport = $('#departureAirportContainer');
-    var destinationAirport = $('#destinationAirportContainer');
-    var hotel = $('#hotelContainer');
-
-    destinationAirport.show();
-    departureAirport.show();
-    hotel.hide();
+    var departureAirportContainer = $('#departureAirportContainer');
+    var destinationAirportContainer = $('#destinationAirportContainer');
+    var hotelContainer = $('#hotelContainer');
+    
+    destinationAirportContainer.show();
+    departureAirportContainer.show();
+    hotelContainer.hide();
 
     $('input[type=radio][name=mode]').change(function () {
-        if (this.value == 'flight') {
-            destinationAirport.show();
-            departureAirport.show();
-            hotel.hide();
-
-        } else if (this.value == 'lodgings') {
-            destinationAirport.hide();
-            departureAirport.hide();
-            hotel.show();
-        }
+            destinationAirportContainer.toggle();
+            departureAirportContainer.toggle();
+            hotelContainer.toggle();
     });
 });
 
 function generateFlightLink(departureAirport, destinationAirport, destination, date) {
-    return 'https://www.momondo.ro/in?a=travelator&url=/flight-search/' +
-        departureAirport + '-' + destinationAirport + '/' + date +
-        '?sort=price_a&encoder=27_1&enc_pid=deeplinks&enc_eid=0&enc_lid=' + destination +
-        '&enc_cid=article&utm_source=travelator&utm_medium=affiliate&utm_term=rev&utm_campaign=deeplinks&utm_content=' + destination;
+    return `https://www.momondo.ro/in?a=travelator&url=/flight-search/${departureAirport}-${destinationAirport}/${date}?sort=price_a&encoder=27_1&enc_pid=deeplinks&enc_eid=0&enc_lid=${destination}&enc_cid=article&utm_source=travelator&utm_medium=affiliate&utm_term=rev&utm_campaign=deeplinks&utm_content=${destination}`;
 }
 
 function generateLodgingsLink(affiliateTag, destination, date) {
-    return 'https://www.momondo.ro/in?a=travelator&url=/hotels/' +
-        affiliateTag + '/' + date +
-        '/2adults?sort=price_a&encoder=27_1&enc_pid=deeplinks&enc_eid=0&enc_lid=' + destination +
-        '&enc_cid=article&utm_source=travelator&utm_medium=affiliate&utm_term=rev&utm_campaign=deeplinks&utm_content=' + destination;
+    return `https://www.momondo.ro/in?a=travelator&url=/hotels/${affiliateTag}/${date}/2adults?sort=price_a&encoder=27_1&enc_pid=deeplinks&enc_eid=0&enc_lid=${destination}&enc_cid=article&utm_source=travelator&utm_medium=affiliate&utm_term=rev&utm_campaign=deeplinks&utm_content=${destination}`;
 }
 
 function convertMonth(month) {
