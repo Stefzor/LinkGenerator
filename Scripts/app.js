@@ -2,15 +2,15 @@ $(document).ready(function () {
     var departureAirportContainer = $('#departureAirportContainer');
     var destinationAirportContainer = $('#destinationAirportContainer');
     var hotelContainer = $('#hotelContainer');
-    
+
     destinationAirportContainer.show();
     departureAirportContainer.show();
     hotelContainer.hide();
 
     $('input[type=radio][name=mode]').change(function () {
-            destinationAirportContainer.toggle();
-            departureAirportContainer.toggle();
-            hotelContainer.toggle();
+        destinationAirportContainer.toggle();
+        departureAirportContainer.toggle();
+        hotelContainer.toggle();
     });
 });
 
@@ -126,7 +126,7 @@ function convertDate(date) {
     if (supportedDateFormatsRegex.format4.test(date)) {
         convertedDate = convertFromRegex4(date);
     }
-    
+
     if (!convertedDateRegex.test(convertedDate) && !convertedDateIntervalRegex.test(convertedDate)) {
         console.log('Date is in the wrong format: ', convertedDate);
     }
@@ -145,7 +145,7 @@ function convertDatesToLinks() {
 
     var links = dates.map(function (date) {
         var convertedDate = convertDate(date);
-        
+
         return generateLink(mode, hotel, departureAirport, destinationAirport, destination, convertedDate);
     });
 
