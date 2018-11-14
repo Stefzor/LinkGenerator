@@ -19,7 +19,7 @@ function generateFlightLink(departureAirport, destinationAirport, destination, d
 }
 
 function generateLodgingsLink(hotel, destination, date) {
-    return `https://www.momondo.ro/in?a=travelator&url=/hotels/${hotel}/${date}/2adults?sort=price_a&encoder=27_1&enc_pid=deeplinks&enc_eid=0&enc_lid=${destination}&enc_cid=article&utm_source=travelator&utm_medium=affiliate&utm_term=rev&utm_campaign=deeplinks&utm_content=${destination}`;
+    return `https://www.momondo.ro/in?a=travelator&url=/hotel-search/${hotel}/${date}/2adults?sort=price_a&encoder=27_1&enc_pid=deeplinks&enc_eid=0&enc_lid=${destination}&enc_cid=article&utm_source=travelator&utm_medium=affiliate&utm_term=rev&utm_campaign=deeplinks&utm_content=${destination}`;
 }
 
 function generateLink(mode, hotel, departureAirport, destinationAirport, destination, date) {
