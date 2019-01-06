@@ -1,4 +1,4 @@
-.label {
+.lg-label {
     display: block;
     margin-top: 25px;
 }
@@ -14,7 +14,7 @@ label {
 }
 
 textarea {
-    min-width: 60%;
+    width: 100%;
 }
 
 #linksContainer {
@@ -24,4 +24,13 @@ textarea {
 #generateLinks {
     display: block;
     margin-top: 20px;
+}
+
+#links {
+    min-height: 420px;
+}
+
+#dates {
+    max-width: 388px;
+    min-height: 246px;
 }

@@ -16,64 +16,63 @@
     <h1 id="header">Link Generator</h1>
 
     <div class="container">
+
         <div class="row">
-            <div class="col">
-                <div id="inputArea">
+            <div class="col-xl-6">
+                <div class="row">
+                    <div class="col-md-auto">
+                        <div id="hotelContainer">
+                            <label for="hotel" class="lg-label">Destination</label>
+                            <input type="text" name="hotel" id="hotel">
 
-                    <div id="flightMode">
-                        <input type="radio" id="flight" name="mode" value="flight" checked />
-                        <label for="flight">Flight Mode</label>
+                        </div>
+                        <div id="destinationContainer">
+                            <label for="destination" class="lg-label">Affiliation</label>
+                            <input type="text" name="destination" id="destination">
+
+                        </div>
                     </div>
 
-                    <div id="lodgingsMode">
-                        <input type="radio" id="lodgings" name="mode" value="lodgings" />
-                        <label for="lodgings">Lodgings Mode</label>
+                    <div class="col-md-auto">
+                        <div id="departureAirportContainer">
+                            <label for="departureAirport" class="lg-label">Departure Airport</label>
+                            <input type="text" name="departureAirport" id="departureAirport">
+                        </div>
+
+                        <div id="destinationAirportContainer">
+                            <label for="destinationAirport" class="lg-label">Destination Airport</label>
+                            <input type="text" name="destinationAirport" id="destinationAirport">
+                        </div>
                     </div>
-
-                    <div id="hotelContainer">
-                        <label for="hotel" class="label">Destination</label>
-                        <input type="text" name="hotel" id="hotel">
-
-                    </div>
-
-                    <div id="departureAirportContainer">
-                        <label for="departureAirport" class="label">Departure Airport</label>
-                        <input type="text" name="departureAirport" id="departureAirport">
-                    </div>
-
-                    <div id="destinationAirportContainer">
-                        <label for="destinationAirport" class="label">Destination Airport</label>
-                        <input type="text" name="destinationAirport" id="destinationAirport">
-                    </div>
-
-                    <div id="destinationContainer">
-                        <label for="destination" class="label">Affiliation</label>
-                        <input type="text" name="destination" id="destination">
-
-                    </div>
-
-                    <div id="datesContainer">
-                        <label for="dates" class="label">Travel Dates</label>
-                        <textarea name="dates" id="dates" cols="30" rows="10"></textarea>
-                    </div>
-
-
-                    <input type="button" id="generateLinks" value="Generate Links" onclick="convertDatesToLinks()"
-                        class="btn btn-primary">
                 </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="datesContainer">
+                            <label for="dates" class="lg-label">Travel Dates</label>
+                            <textarea name="dates" id="dates" cols="30" rows="10"></textarea>
+                        </div>
 
-                <div id="linksContainer">
-                    <label for="links" class="label">Generated Links</label>
-                    <textarea name="links" id="links" cols="30" rows="10"></textarea>
+                        <input type="button" id="generateLinks" value="Generate Links" onclick="convertDatesToLinks()"
+                            class="btn btn-primary">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-6">
+                <div class="row">
+                    <div class="col">
+                        <div id="linksContainer">
+                            <label for="links" class="lg-label">Generated Links</label>
+                            <textarea name="links" id="links" cols="30" rows="10" readonly></textarea>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
 
-    </div>
-
-
-    <script src="Dependencies/jquery-3.3.1.min.js"></script>
-    <script src="Scripts/app.js"></script>
+        <script src="Dependencies/jquery-3.3.1.min.js"></script>
+        <script src="Scripts/app.js"></script>
 </body>
 
 </html>

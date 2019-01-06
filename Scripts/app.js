@@ -1,35 +1,13 @@
-$(document).ready(function () {
-    var departureAirportContainer = $('#departureAirportContainer');
-    var destinationAirportContainer = $('#destinationAirportContainer');
-    var hotelContainer = $('#hotelContainer');
-
-    destinationAirportContainer.show();
-    departureAirportContainer.show();
-    hotelContainer.hide();
-
-    $('input[type=radio][name=mode]').change(function () {
-        destinationAirportContainer.toggle();
-        departureAirportContainer.toggle();
-        hotelContainer.toggle();
-    });
-});
-
-function generateFlightLink(departureAirport, destinationAirport, destination, date) {
-    return `https://www.momondo.ro/in?a=travelator&url=/flight-search/${departureAirport}-${destinationAirport}/${date}?sort=price_a&encoder=27_1&enc_pid=deeplinks&enc_eid=0&enc_lid=${destination}&enc_cid=article&utm_source=travelator&utm_medium=affiliate&utm_term=rev&utm_campaign=deeplinks&utm_content=${destination}`;
+function generateFlightLink(departureAirport, destinationAirport, destination, date, convertedDate) {
+    return `${date}: <strong><a href="https://www.momondo.ro/in?a=travelator&url=/flight-search/${departureAirport}-${destinationAirport}/${convertedDate}?sort=price_a&encoder=27_1&enc_pid=deeplinks&enc_eid=0&enc_lid=${destination}&enc_cid=article&utm_source=travelator&utm_medium=affiliate&utm_term=rev&utm_campaign=deeplinks&utm_content=${destination}">ZBOR</a></strong>`;
 }
 
-function generateLodgingsLink(hotel, destination, date) {
-    return `https://www.momondo.ro/in?a=travelator&url=/hotel-search/${hotel}/${date}/2adults?sort=price_a&encoder=27_1&enc_pid=deeplinks&enc_eid=0&enc_lid=${destination}&enc_cid=article&utm_source=travelator&utm_medium=affiliate&utm_term=rev&utm_campaign=deeplinks&utm_content=${destination}`;
+function generateLodgingsLink(hotel, destination, date, convertedDate) {
+    return `${date}: <strong><a href="https://www.momondo.ro/in?a=travelator&url=/hotel-search/${hotel}/${convertedDate}/2adults?sort=price_a&encoder=27_1&enc_pid=deeplinks&enc_eid=0&enc_lid=${destination}&enc_cid=article&utm_source=travelator&utm_medium=affiliate&utm_term=rev&utm_campaign=deeplinks&utm_content=${destination}">CAZARE</a></strong>`;
 }
 
-function generateLink(mode, hotel, departureAirport, destinationAirport, destination, date) {
-    if (mode === 'flight') {
-        return generateFlightLink(departureAirport, destinationAirport, destination, date);
-    } else if (mode === 'lodgings') {
-        return generateLodgingsLink(hotel, destination, date);
-    } else {
-        console.log('Invalid Mode. Something went wrong: ' + mode);
-    }
+function generateLink(hotel, departureAirport, destinationAirport, destination, date, convertedDate) {
+    return generateFlightLink(departureAirport, destinationAirport, destination, date, convertedDate) + ' | ' + generateLodgingsLink(hotel, destination, date, convertedDate);
 }
 
 function convertMonth(month) {
@@ -136,7 +114,6 @@ function convertDate(date) {
 
 function convertDatesToLinks() {
 
-    var mode = $('input[type=radio][name=mode]:checked').val();
     var hotel = $('#hotel').val();
     var departureAirport = $('#departureAirport').val();
     var destinationAirport = $('#destinationAirport').val();
@@ -146,7 +123,7 @@ function convertDatesToLinks() {
     var links = dates.map(function (date) {
         var convertedDate = convertDate(date);
 
-        return generateLink(mode, hotel, departureAirport, destinationAirport, destination, convertedDate);
+        return generateLink(hotel, departureAirport, destinationAirport, destination, date, convertedDate);
     });
 
     $('#links').val(links.join('\n'));
