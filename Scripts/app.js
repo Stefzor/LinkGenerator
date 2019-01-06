@@ -1,13 +1,25 @@
-function generateFlightLink(departureAirport, destinationAirport, destination, date, convertedDate) {
-    return `${date}: <strong><a href="https://www.momondo.ro/in?a=travelator&url=/flight-search/${departureAirport}-${destinationAirport}/${convertedDate}?sort=price_a&encoder=27_1&enc_pid=deeplinks&enc_eid=0&enc_lid=${destination}&enc_cid=article&utm_source=travelator&utm_medium=affiliate&utm_term=rev&utm_campaign=deeplinks&utm_content=${destination}">ZBOR</a></strong>`;
+$(document).ready(function () {
+    var destinationCodeContainer = $('#destinationCodeContainer');
+
+    $('input[type=checkbox][name=flightsOnly]').change(function () {
+        destinationCodeContainer.toggle();
+    });
+});
+
+function generateFlightLink(departureAirport, destinationAirport, affiliation, date, convertedDate) {
+    return `${date}: <strong><a href="https://www.momondo.ro/in?a=travelator&url=/flight-search/${departureAirport}-${destinationAirport}/${convertedDate}?sort=price_a&encoder=27_1&enc_pid=deeplinks&enc_eid=0&enc_lid=${affiliation}&enc_cid=article&utm_source=travelator&utm_medium=affiliate&utm_term=rev&utm_campaign=deeplinks&utm_content=${affiliation}">ZBOR</a></strong>`;
 }
 
-function generateLodgingsLink(hotel, destination, convertedDate) {
-    return `<strong><a href="https://www.momondo.ro/in?a=travelator&url=/hotel-search/${hotel}/${convertedDate}/2adults?sort=price_a&encoder=27_1&enc_pid=deeplinks&enc_eid=0&enc_lid=${destination}&enc_cid=article&utm_source=travelator&utm_medium=affiliate&utm_term=rev&utm_campaign=deeplinks&utm_content=${destination}">CAZARE</a></strong>`;
+function generateLodgingsLink(destinationCode, affiliation, convertedDate) {
+    return `<strong><a href="https://www.momondo.ro/in?a=travelator&url=/hotel-search/${destinationCode}/${convertedDate}/2adults?sort=price_a&encoder=27_1&enc_pid=deeplinks&enc_eid=0&enc_lid=${affiliation}&enc_cid=article&utm_source=travelator&utm_medium=affiliate&utm_term=rev&utm_campaign=deeplinks&utm_content=${affiliation}">CAZARE</a></strong>`;
 }
 
-function generateLink(hotel, departureAirport, destinationAirport, destination, date, convertedDate) {
-    return generateFlightLink(departureAirport, destinationAirport, destination, date, convertedDate) + ' | ' + generateLodgingsLink(hotel, destination, convertedDate);
+function generateLink(isFlightsOnly, destinationCode, departureAirport, destinationAirport, affiliation, date, convertedDate) {
+    if (isFlightsOnly === true) {
+        return generateFlightLink(departureAirport, destinationAirport, affiliation, date, convertedDate);
+    }
+
+    return generateFlightLink(departureAirport, destinationAirport, affiliation, date, convertedDate) + ' | ' + generateLodgingsLink(destinationCode, affiliation, convertedDate);
 }
 
 function convertMonth(month) {
@@ -46,8 +58,8 @@ var supportedDateFormatsRegex = {
     format4: new RegExp('^[0-3]?\\d{1}[\\s](ian|feb|mar|apr|mai|iun|iul|aug|sep|nov|dec)[\\s]\\d{4}[\\s][-][\\s][0-3]?\\d{1}[\\s](ian|feb|mar|apr|mai|iun|iul|aug|sep|nov|dec)[\\s]\\d{4}$') //DD MM YYYY - DD MM YYYY
 }
 
-var convertedDateIntervalRegex = new RegExp('^\\d{4}[-][0-1][0-3][-][0-3]\\d{1}[/]\\d{4}[-][0-1][0-3][-][0-3]\\d{1}$');
-var convertedDateRegex = new RegExp('^\\d{4}[-][0-1][0-3][-][0-3]\\d{1}$');
+var convertedDateIntervalRegex = new RegExp('^\\d{4}[-]([0][1-9]|[1][0-2])[-]([0-2]\\d|[3][0-1])[/]\\d{4}[-]([0][1-9]|[1][0-2])[-]([0-2]\\d|[3][0-1])$');
+var convertedDateRegex = new RegExp('^\\d{4}[-]([0][1-9]|[1][0-2])[-]([0-2]\\d|[3][0-1])$');
 
 function convertFromRegex1(date) {
     var days = date.split(' ')[0];
@@ -113,17 +125,17 @@ function convertDate(date) {
 }
 
 function convertDatesToLinks() {
-
-    var hotel = $('#hotel').val();
+    var isFlightsOnly = $('input[type=checkbox][name=flightsOnly]').is(':checked');
+    var destinationCode = $('#destinationCode').val();
     var departureAirport = $('#departureAirport').val();
     var destinationAirport = $('#destinationAirport').val();
-    var destination = $('#destination').val();
+    var affiliation = $('#affiliation').val();
     var dates = $('#dates').val().split(/\n/);
 
     var links = dates.map(function (date) {
         var convertedDate = convertDate(date);
 
-        return generateLink(hotel, departureAirport, destinationAirport, destination, date, convertedDate);
+        return generateLink(isFlightsOnly, destinationCode, departureAirport, destinationAirport, affiliation, date, convertedDate);
     });
 
     $('#links').val(links.join('\n'));

@@ -19,20 +19,17 @@
 
         <div class="row">
             <div class="col-xl-6">
+
                 <div class="row">
                     <div class="col-md-auto">
-                        <div id="hotelContainer">
-                            <label for="hotel" class="lg-label">Destination</label>
-                            <input type="text" name="hotel" id="hotel">
-
-                        </div>
-                        <div id="destinationContainer">
-                            <label for="destination" class="lg-label">Affiliation</label>
-                            <input type="text" name="destination" id="destination">
-
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="flightsOnly" name="flightsOnly">
+                            <label class="custom-control-label" for="flightsOnly">Flights Only</label>
                         </div>
                     </div>
+                </div>
 
+                <div class="row">
                     <div class="col-md-auto">
                         <div id="departureAirportContainer">
                             <label for="departureAirport" class="lg-label">Departure Airport</label>
@@ -44,7 +41,20 @@
                             <input type="text" name="destinationAirport" id="destinationAirport">
                         </div>
                     </div>
+
+                    <div class="col-md-auto">
+                        <div id="affiliationContainer">
+                            <label for="affiliation" class="lg-label">Affiliation</label>
+                            <input type="text" name="affiliation" id="affiliation">
+                        </div>
+
+                        <div id="destinationCodeContainer">
+                            <label for="destinationCode" class="lg-label">Destination Code</label>
+                            <input type="text" name="destinationCode" id="destinationCode">
+                        </div>
+                    </div>
                 </div>
+
                 <div class="row">
                     <div class="col-md-12">
                         <div id="datesContainer">
