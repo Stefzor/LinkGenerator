@@ -2,12 +2,12 @@ function generateFlightLink(departureAirport, destinationAirport, destination, d
     return `${date}: <strong><a href="https://www.momondo.ro/in?a=travelator&url=/flight-search/${departureAirport}-${destinationAirport}/${convertedDate}?sort=price_a&encoder=27_1&enc_pid=deeplinks&enc_eid=0&enc_lid=${destination}&enc_cid=article&utm_source=travelator&utm_medium=affiliate&utm_term=rev&utm_campaign=deeplinks&utm_content=${destination}">ZBOR</a></strong>`;
 }
 
-function generateLodgingsLink(hotel, destination, date, convertedDate) {
-    return `${date}: <strong><a href="https://www.momondo.ro/in?a=travelator&url=/hotel-search/${hotel}/${convertedDate}/2adults?sort=price_a&encoder=27_1&enc_pid=deeplinks&enc_eid=0&enc_lid=${destination}&enc_cid=article&utm_source=travelator&utm_medium=affiliate&utm_term=rev&utm_campaign=deeplinks&utm_content=${destination}">CAZARE</a></strong>`;
+function generateLodgingsLink(hotel, destination, convertedDate) {
+    return `<strong><a href="https://www.momondo.ro/in?a=travelator&url=/hotel-search/${hotel}/${convertedDate}/2adults?sort=price_a&encoder=27_1&enc_pid=deeplinks&enc_eid=0&enc_lid=${destination}&enc_cid=article&utm_source=travelator&utm_medium=affiliate&utm_term=rev&utm_campaign=deeplinks&utm_content=${destination}">CAZARE</a></strong>`;
 }
 
 function generateLink(hotel, departureAirport, destinationAirport, destination, date, convertedDate) {
-    return generateFlightLink(departureAirport, destinationAirport, destination, date, convertedDate) + ' | ' + generateLodgingsLink(hotel, destination, date, convertedDate);
+    return generateFlightLink(departureAirport, destinationAirport, destination, date, convertedDate) + ' | ' + generateLodgingsLink(hotel, destination, convertedDate);
 }
 
 function convertMonth(month) {
