@@ -52,10 +52,10 @@ function convertMonth(month) {
 }
 
 var supportedDateFormatsRegex = {
-    format1: new RegExp('^[0-3]?\\d{1}[\\s](ian|feb|mar|apr|mai|iun|iul|aug|sep|nov|dec)[\\s]\\d{4}$'), //DD MMM YYYY
-    format2: new RegExp('^[0-3]?\\d{1}[-][0-3]?\\d{1}[\\s](ian|feb|mar|apr|mai|iun|iul|aug|sep|nov|dec)[\\s]\\d{4}$'), //DD-DD MMM YYYY
-    format3: new RegExp('^[0-3]?\\d{1}[\\s](ian|feb|mar|apr|mai|iun|iul|aug|sep|nov|dec)[\\s][-][\\s][0-3]?\\d{1}[\\s](ian|feb|mar|apr|mai|iun|iul|aug|sep|nov|dec)[\\s]\\d{4}$'), //DD MM - DD MM YYYY
-    format4: new RegExp('^[0-3]?\\d{1}[\\s](ian|feb|mar|apr|mai|iun|iul|aug|sep|nov|dec)[\\s]\\d{4}[\\s][-][\\s][0-3]?\\d{1}[\\s](ian|feb|mar|apr|mai|iun|iul|aug|sep|nov|dec)[\\s]\\d{4}$') //DD MM YYYY - DD MM YYYY
+    format1: new RegExp('^[0-3]?\\d{1}[\\s](ian|feb|mar|apr|mai|iun|iul|aug|sep|oct|nov|dec)[\\s]\\d{4}$'), //DD MMM YYYY
+    format2: new RegExp('^[0-3]?\\d{1}[-][0-3]?\\d{1}[\\s](ian|feb|mar|apr|mai|iun|iul|aug|sep|oct|nov|dec)[\\s]\\d{4}$'), //DD-DD MMM YYYY
+    format3: new RegExp('^[0-3]?\\d{1}[\\s](ian|feb|mar|apr|mai|iun|iul|aug|sep|oct|nov|dec)[\\s][-][\\s][0-3]?\\d{1}[\\s](ian|feb|mar|apr|mai|iun|iul|aug|sep|oct|nov|dec)[\\s]\\d{4}$'), //DD MM - DD MM YYYY
+    format4: new RegExp('^[0-3]?\\d{1}[\\s](ian|feb|mar|apr|mai|iun|iul|aug|sep|oct|nov|dec)[\\s]\\d{4}[\\s][-][\\s][0-3]?\\d{1}[\\s](ian|feb|mar|apr|mai|iun|iul|aug|sep|oct|nov|dec)[\\s]\\d{4}$') //DD MM YYYY - DD MM YYYY
 }
 
 var convertedDateIntervalRegex = new RegExp('^\\d{4}[-]([0][1-9]|[1][0-2])[-]([0-2]\\d|[3][0-1])[/]\\d{4}[-]([0][1-9]|[1][0-2])[-]([0-2]\\d|[3][0-1])$');
@@ -76,7 +76,7 @@ function convertFromRegex1(date) {
 function convertFromRegex2(date) {
     var day1 = date.split('-')[0];
     var day2 = new RegExp('[-][0-3]?\\d{1}').exec(date)[0].slice(1);
-    var month = new RegExp('(ian|feb|mar|apr|mai|iun|iul|aug|sep|nov|dec)').exec(date)[0];
+    var month = new RegExp('(ian|feb|mar|apr|mai|iun|iul|aug|sep|oct|nov|dec)').exec(date)[0];
     var year = new RegExp('\\d{4}').exec(date)[0];
 
     var date1 = `${day1} ${month} ${year}`;
